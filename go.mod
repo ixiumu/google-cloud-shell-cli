@@ -1,4 +1,4 @@
-module ixiumu/gcs
+module ixiumu/google-cloud-shell-cli
 
 go 1.22.3
 

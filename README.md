@@ -1,8 +1,10 @@
 # Google Cloud Shell
 
-```bash
-CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build
-```
+Download the appropriate file for your platform from [releases](https://github.com/ixiumu/google-cloud-shell-cli/releases)
+
+Create your own access [credentials](https://developers.google.com/workspace/guides/create-credentials) and save them to `~/.ssh/gcs_credentials.json`
+
+Edit `~/.ssh/config` and add the following content to enable connecting to Google Cloud Shell using VSCode Remote SSH
 
 ```bash
 Host cloudshell
