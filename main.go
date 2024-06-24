@@ -16,7 +16,7 @@ type SSHConfig struct {
 }
 
 func main() {
-	sshConfig, err := getSSHConfig()
+	sshConfig, err := getSSHConfigLocal()
 	if err != nil {
 		log.Println("Error get SSH config:", err)
 		return
@@ -29,7 +29,7 @@ func main() {
 	}
 }
 
-func launchSSHCommand(config SSHConfig) {
+func launchSSHCommand(config *SSHConfig) {
 	var cmd *exec.Cmd
 
 	var parm = []string{"-p", fmt.Sprintf("%d", config.Port), fmt.Sprintf("%s@%s", config.Username, config.Host)}
