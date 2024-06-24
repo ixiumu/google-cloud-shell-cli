@@ -42,7 +42,7 @@ func getSSHConfigLocal() (*SSHConfig, error) {
 		}
 
 		// debug
-		log.Println(status)
+		//log.Println(status)
 
 		if status.Error.Code == 401 {
 			log.Println("Unauthorized or token has expired, please reauthorize.")
@@ -61,8 +61,9 @@ func getSSHConfigLocal() (*SSHConfig, error) {
 			if err != nil {
 				return nil, err
 			}
-
 		} else if status.State == "STARTING" {
+			log.Println("Waiting for startup...")
+		} else if status.State == "PENDING" {
 			log.Println("Waiting for startup...")
 		} else {
 			log.Println(status)

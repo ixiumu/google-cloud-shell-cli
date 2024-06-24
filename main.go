@@ -32,7 +32,7 @@ func main() {
 func launchSSHCommand(config *SSHConfig) {
 	var cmd *exec.Cmd
 
-	var parm = []string{"-p", fmt.Sprintf("%d", config.Port), fmt.Sprintf("%s@%s", config.Username, config.Host)}
+	var parm = []string{"-p", fmt.Sprintf("%d", config.Port), fmt.Sprintf("%s@%s", config.Username, config.Host), "-o", "StrictHostKeyChecking=no"}
 	parm = append(parm, os.Args[1:]...)
 
 	if runtime.GOOS == "windows" {

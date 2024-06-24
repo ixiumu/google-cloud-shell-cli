@@ -12,5 +12,6 @@ Host cloudshell
     HostName 127.0.0.1
     Port 22
     IdentityFile ~/.ssh/id_rsa
+    StrictHostKeyChecking no
     ProxyCommand gcs -i ~/.ssh/id_rsa -W %h:%p
 ```
