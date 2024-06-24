@@ -4,7 +4,6 @@ on:
   workflow_dispatch:
   release:
     types: [published]
-  push:
 
 jobs:
   build:
@@ -44,8 +43,6 @@ jobs:
             goarch: amd64
           - goos: windows
             goarch: arm64
-          - goos: windows
-            goarch: 386
 
     runs-on: ubuntu-latest
     env:
