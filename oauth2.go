@@ -29,7 +29,7 @@ type StateResponse struct {
 }
 
 const (
-	listenPort      = 8086
+	listenAddress      = "127.0.0.1:8086"
 )
 
 func getSSHConfigLocal() (*SSHConfig, error) {
@@ -66,7 +66,7 @@ func getSSHConfigLocal() (*SSHConfig, error) {
 		} else if status.State == "PENDING" {
 			log.Println("Waiting for startup...")
 		} else {
-			log.Println(status)
+			log.Printf("State: %s", status)
 		}
 
 		time.Sleep(3 * time.Second)
@@ -187,7 +187,7 @@ func saveTokenToFile(file string, token *oauth2.Token) error {
 
 // Get token from the web flow
 func getTokenFromWeb(config *oauth2.Config) (*oauth2.Token, error) {
-	config.RedirectURL = fmt.Sprintf("http://localhost:%v/callback", listenPort)
+	config.RedirectURL = fmt.Sprintf("http://%s/callback", listenAddress)
 	authURL := config.AuthCodeURL("state-token", oauth2.AccessTypeOffline)
 	// log.Print(authURL)
 
@@ -211,7 +211,7 @@ func getTokenFromWeb(config *oauth2.Config) (*oauth2.Token, error) {
 }
 
 func listenForCode(codeCh chan<- string) {
-	srv := http.Server{Addr: fmt.Sprintf(":%v", listenPort)}
+	srv := http.Server{Addr: listenAddress}
 	http.HandleFunc("/callback", func(w http.ResponseWriter, r *http.Request) {
 		code := r.URL.Query().Get("code")
 		if code != "" {
